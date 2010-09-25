@@ -14,7 +14,11 @@ tell application "OmniFocus"
 			end if
 			set listItems to {}
 			repeat with anItem in theSelectedItems
-				set listItem to prefix & name of anItem
+				if completed of anItem is true then
+				  set listItem to prefix & "<strike>" & name of anItem & "</strike>"
+				else
+					set listItem to prefix & name of anItem
+				end if
 				-- See if there is a note for this item
 				if not note of anItem is "" then
 					set listItem to listItem & lineBreakSequence & note of anItem
